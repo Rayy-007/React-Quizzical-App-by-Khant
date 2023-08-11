@@ -2,26 +2,25 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Questions from "./Questions";
 import { nanoid } from "nanoid";
-import QandA from "../data";
 
 function Quiz() {
-  const [data, setData] = React.useState(QandA);
+  const [data, setData] = React.useState();
   const [quizs, setQuizs] = React.useState();
   const [playAgain, setPlayAgain] = React.useState(1);
   const [isSelectedAllAnswers, setIsSelectedAllAnswers] = React.useState(false);
-  const [loading, setLoading] = React.useState(false);
+  const [loading, setLoading] = React.useState(true);
   const [score, setScore] = React.useState(0);
 
-  // React.useEffect(() => {
-  //   fetch(
-  //     "https://opentdb.com/api.php?amount=5&category=21&difficulty=medium&type=multiple"
-  //   )
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setData(data.results);
-  //       setLoading(false);
-  //     });
-  // }, [playAgain]);
+  React.useEffect(() => {
+    fetch(
+      "https://opentdb.com/api.php?amount=5&category=21&difficulty=medium&type=multiple"
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setData(data.results);
+        setLoading(false);
+      });
+  }, [playAgain]);
 
   React.useEffect(() => {
     setQuizs(
@@ -79,13 +78,19 @@ function Quiz() {
       checkedAnswer={item.checkedAnswer}
     />
   ));
+  // <h1>
+  //   Loading <span>....</span>
+  // </h1>
 
   return (
     <>
       {loading ? (
-        <h1>
-          Loading <span>....</span>
-        </h1>
+        <div class="loading-spinner">
+          <div class="spinner">
+            <div></div>
+            <div></div>
+          </div>
+        </div>
       ) : (
         <div className="con">
           <Link to="/">⬅ Back to Home</Link>
