@@ -71,6 +71,8 @@ function Quiz() {
     }
   }
 
+  console.log(isSelectedAllAnswers);
+
   /** Create the quizs */
   const questionsEl = quizs?.map((item) => (
     <Questions
