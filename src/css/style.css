@@ -229,6 +229,22 @@ hr {
   cursor: not-allowed;
 }
 
+/* =======================================
+    Please answer for all question message 
+    ======================================= */
+.alert {
+  position: fixed;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%); /* To make the alert box in the center*/
+
+  background-color: var(--red-color);
+  border-radius: var(--btn-border-radius);
+  padding: 20px 30px;
+  width: 300px;
+  z-index: 999;
+}
+
 /* ==================
     Loading Animation 
   ===================
