@@ -66,7 +66,9 @@ function Quiz() {
       setPlayAgain((prev) => prev + 1);
     } else {
       // If the user " Not " select all answers
-      setShowMessage(true);
+      if (!showMessage) {
+        setShowMessage(true);
+      }
       setIsSelectedAllAnswers(() => quizs.every((quiz) => quiz.checked));
       setScore(
         quizs.filter((quiz) => quiz.checkedAnswer === quiz.correctAnswer).length
@@ -103,8 +105,8 @@ function Quiz() {
   return (
     <>
       {loading ? (
-        <div class="loading-spinner">
-          <div class="spinner">
+        <div className="loading-spinner">
+          <div className="spinner">
             <div></div>
             <div></div>
           </div>
