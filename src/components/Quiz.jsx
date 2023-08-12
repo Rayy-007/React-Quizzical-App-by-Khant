@@ -66,13 +66,12 @@ function Quiz() {
       setPlayAgain((prev) => prev + 1);
     } else {
       // If the user " Not " select all answers
-      if (!showMessage) {
-        setShowMessage(true);
-      }
-      setIsSelectedAllAnswers(() => quizs.every((quiz) => quiz.checked));
+      const isAllSelected = quizs.every((quiz) => quiz.checked);
+      setIsSelectedAllAnswers(() => isAllSelected);
       setScore(
         quizs.filter((quiz) => quiz.checkedAnswer === quiz.correctAnswer).length
       );
+      setShowMessage(!isAllSelected);
     }
   }
 
