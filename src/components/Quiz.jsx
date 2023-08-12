@@ -76,16 +76,16 @@ function Quiz() {
   }
 
   /** For hiding the Show Message ELement after 3 second  */
-  // React.useEffect(() => {
-  //   let timeId;
-  //   if (showMessage) {
-  //     // Create the Set Time out
-  //     timeId = setTimeout(() => {
-  //       setShowMessage(false);
-  //     }, 3000);
-  //   }
-  //   return () => clearTimeout(timeId); // clear the time out (to prevent memory leaks)
-  // }, [showMessage]);
+  React.useEffect(() => {
+    let timeId;
+    if (showMessage) {
+      // Create the Set Time out
+      timeId = setTimeout(() => {
+        setShowMessage(false);
+      }, 3000);
+    }
+    return () => clearTimeout(timeId); // clear the time out (to prevent memory leaks)
+  }, [showMessage]);
 
   /** Create the quizs */
   const questionsEl = quizs?.map((item) => (
