@@ -10,7 +10,7 @@ function Quiz() {
   const [isSelectedAllAnswers, setIsSelectedAllAnswers] = React.useState(false); // Fro checking the selected answer by the use
   const [loading, setLoading] = React.useState(true); // forl loading
   const [score, setScore] = React.useState(0); // for setting the Score or mark
-  const [showMessage, setShowMessage] = React.useState(false); // for showing the error message
+  // const [showMessage, setShowMessage] = React.useState(false); // for showing the error message
 
   /** Fetching the data  */
   React.useEffect(() => {
@@ -60,7 +60,7 @@ function Quiz() {
   function checkAllAnswers() {
     if (isSelectedAllAnswers) {
       // If the user select all answers
-      showMessage(false);
+      // showMessage(false);
       setIsSelectedAllAnswers(false);
       setLoading(true);
       setPlayAgain((prev) => prev + 1);
@@ -71,21 +71,21 @@ function Quiz() {
       setScore(
         quizs.filter((quiz) => quiz.checkedAnswer === quiz.correctAnswer).length
       );
-      setShowMessage(!isAllSelected);
+      // setShowMessage(!isAllSelected);
     }
   }
 
-  /** For hiding the Show Message ELement after 3 second  */
-  React.useEffect(() => {
-    let timeId;
-    if (showMessage) {
-      // Create the Set Time out
-      timeId = setTimeout(() => {
-        setShowMessage(false);
-      }, 3000);
-    }
-    return () => clearTimeout(timeId); // clear the time out (to prevent memory leaks)
-  }, [showMessage]);
+  // /** For hiding the Show Message ELement after 3 second  */
+  // React.useEffect(() => {
+  //   let timeId;
+  //   if (showMessage) {
+  //     // Create the Set Time out
+  //     timeId = setTimeout(() => {
+  //       setShowMessage(false);
+  //     }, 3000);
+  //   }
+  //   return () => clearTimeout(timeId); // clear the time out (to prevent memory leaks)
+  // }, [showMessage]);
 
   /** Create the quizs */
   const questionsEl = quizs?.map((item) => (
@@ -113,11 +113,11 @@ function Quiz() {
       ) : (
         <div className="con">
           <Link to="/">⬅ Back to Home</Link>
-          {showMessage && (
+          {/* {showMessage && (
             <div className="alert">
               <h4>Please answer all questions</h4>
             </div>
-          )}
+          )} */}
           <div className="quiz-con">{questionsEl}</div>
           <div className="check-btn-con flex">
             {isSelectedAllAnswers && (
