@@ -60,7 +60,7 @@ function Quiz() {
   function checkAllAnswers() {
     if (isSelectedAllAnswers) {
       // If the user select all answers
-      showMessage(false);
+      setShowMessage(false);
       setIsSelectedAllAnswers(false);
       setLoading(true);
       setPlayAgain((prev) => prev + 1);
@@ -75,17 +75,17 @@ function Quiz() {
     }
   }
 
-  // /** For hiding the Show Message ELement after 3 second  */
-  // React.useEffect(() => {
-  //   // let timeId;
-  //   if (showMessage) {
-  //     // Create the Set Time out
-  //     setTimeout(() => {
-  //       setShowMessage(false);
-  //     }, 3000);
-  //   }
-  //   // return () => clearTimeout(timeId); // clear the time out (to prevent memory leaks)
-  // }, [showMessage]);
+  /** For hiding the Show Message ELement after 3 second  */
+  React.useEffect(() => {
+    let timeId;
+    if (showMessage) {
+      // Create the Set Time out
+      timeId = setTimeout(() => {
+        setShowMessage(false);
+      }, 3000);
+    }
+    return () => clearTimeout(timeId); // clear the time out (to prevent memory leaks)
+  }, [showMessage]);
 
   /** Create the quizs */
   const questionsEl = quizs?.map((item) => (
