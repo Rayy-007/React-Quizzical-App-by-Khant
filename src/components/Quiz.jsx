@@ -10,6 +10,7 @@ function Quiz() {
   const [isSelectedAllAnswers, setIsSelectedAllAnswers] = React.useState(false); // Fro checking the selected answer by the use
   const [loading, setLoading] = React.useState(true); // forl loading
   const [score, setScore] = React.useState(0); // for setting the Score or mark
+  const [showMessage, setShowMessage] = React.useState(false); // for showing the error message
 
   /** Fetching the data  */
   React.useEffect(() => {
@@ -59,11 +60,13 @@ function Quiz() {
   function checkAllAnswers() {
     if (isSelectedAllAnswers) {
       // If the user select all answers
+      showMessage(false);
       setIsSelectedAllAnswers(false);
       setLoading(true);
       setPlayAgain((prev) => prev + 1);
     } else {
       // If the user " Not " select all answers
+      setShowMessage(true);
       setIsSelectedAllAnswers(() => quizs.every((quiz) => quiz.checked));
       setScore(
         quizs.filter((quiz) => quiz.checkedAnswer === quiz.correctAnswer).length
@@ -99,6 +102,11 @@ function Quiz() {
       ) : (
         <div className="con">
           <Link to="/">⬅ Back to Home</Link>
+          {showMessage && (
+            <div className="alert">
+              <h4>Please answer all questions</h4>
+            </div>
+          )}
           <div className="quiz-con">{questionsEl}</div>
           <div className="check-btn-con flex">
             {isSelectedAllAnswers && (
