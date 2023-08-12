@@ -4,13 +4,14 @@ import Questions from "./Questions";
 import { nanoid } from "nanoid";
 
 function Quiz() {
-  const [data, setData] = React.useState();
-  const [quizs, setQuizs] = React.useState();
-  const [playAgain, setPlayAgain] = React.useState(1);
-  const [isSelectedAllAnswers, setIsSelectedAllAnswers] = React.useState(false);
-  const [loading, setLoading] = React.useState(true);
-  const [score, setScore] = React.useState(0);
+  const [data, setData] = React.useState(); // set the data from API
+  const [quizs, setQuizs] = React.useState(); // Set data that I want from data
+  const [playAgain, setPlayAgain] = React.useState(1); // set the number for  fetching API again
+  const [isSelectedAllAnswers, setIsSelectedAllAnswers] = React.useState(false); // Fro checking the selected answer by the use
+  const [loading, setLoading] = React.useState(true); // forl loading
+  const [score, setScore] = React.useState(0); // for setting the Score or mark
 
+  /** Fetching the data  */
   React.useEffect(() => {
     fetch(
       "https://opentdb.com/api.php?amount=5&category=21&difficulty=medium&type=multiple"
@@ -22,6 +23,7 @@ function Quiz() {
       });
   }, [playAgain]);
 
+  /** Make the array of obj from data to quizs  */
   React.useEffect(() => {
     setQuizs(
       data?.map((item) => {
@@ -40,6 +42,7 @@ function Quiz() {
     );
   }, [data]);
 
+  /** Check User selected answer and set it to true */
   function checkAnswer(id, selectedAns) {
     setQuizs((prevQuiz) =>
       prevQuiz.map((quiz) => {
@@ -52,13 +55,15 @@ function Quiz() {
     );
   }
 
+  /** Check all user selected answer and set the scores */
   function checkAllAnswers() {
     if (isSelectedAllAnswers) {
+      // If the user select all answers
       setIsSelectedAllAnswers(false);
       setLoading(true);
-
       setPlayAgain((prev) => prev + 1);
     } else {
+      // If the user " Not " select all answers
       setIsSelectedAllAnswers(() => quizs.every((quiz) => quiz.checked));
       setScore(
         quizs.filter((quiz) => quiz.checkedAnswer === quiz.correctAnswer).length
@@ -66,6 +71,7 @@ function Quiz() {
     }
   }
 
+  /** Create the quizs */
   const questionsEl = quizs?.map((item) => (
     <Questions
       key={item.id}
@@ -78,9 +84,6 @@ function Quiz() {
       checkedAnswer={item.checkedAnswer}
     />
   ));
-  // <h1>
-  //   Loading <span>....</span>
-  // </h1>
 
   return (
     <>
