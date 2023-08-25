@@ -1,4 +1,5 @@
 import React from "react";
+import { decode } from "html-entities";
 function AnswerButton({
   id,
   answers,
@@ -28,7 +29,7 @@ function AnswerButton({
             : "normal"
         }`}
       >
-        {answer}
+        {decode(answer)}
       </label>
     </div>
   ));

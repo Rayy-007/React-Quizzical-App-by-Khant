@@ -1,4 +1,5 @@
 import React from "react";
+import { decode } from "html-entities";
 import AnswerButton from "./AnswerButton";
 function Questions({
   id,
@@ -11,7 +12,7 @@ function Questions({
 }) {
   return (
     <div className="quiz">
-      <h3>{questions}</h3>
+      <h3>{decode(questions)}</h3>
       <div className="quiz-btn-container flex">
         <AnswerButton
           id={id}
