@@ -6,7 +6,7 @@ function IntroApp() {
     <div className="intro flex">
       <div className="intro-des flex">
         <h1>Quizzical</h1>
-        <p>Some description if needed</p>
+        <p>How much do you know about Sport? Let's take a challenge!</p>
       </div>
       <Link className="intro-btn" to="quiz">
         Start quiz
